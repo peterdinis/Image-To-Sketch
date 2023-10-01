@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'accounts',
-    'sketchs'
+    'sketchs',
 
     ### Packages
     "debug_toolbar",
