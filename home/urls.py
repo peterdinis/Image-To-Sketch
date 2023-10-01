@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.urls import path
+from . import views
 
-def homepage(request):
-    return render(request, 'home/index.html')
+urlpatterns = [
+    path("", views.homepage, name='homepage')
+]
