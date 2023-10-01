@@ -1,0 +1,24 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+      defer
+    ></script>
+    <link
+      href="https://npmcdn.com/flickity@2/dist/flickity.css"
+      rel="stylesheet"
+    />
+    <script src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js"></script>
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <body>
+    {% block content %} {% endblock %}
+    <script type="text/javascript" src="{% static 'js/client.js' %}"></script>
+  </body>
+</html>
