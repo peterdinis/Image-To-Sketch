@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'home',
+
+    ### Packages
     "debug_toolbar",
     'crispy_forms',
     "crispy_tailwind"
