@@ -10,3 +10,5 @@ def registerpage(request):
 def profilepage(request):
     return render(request, 'accounts/profile.html')
 
+def dashboard(request):
+    return render(request, 'accounts/dashboard.html')
