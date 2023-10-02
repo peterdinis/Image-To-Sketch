@@ -7,13 +7,13 @@ image_path = os.path.join(os.path.dirname(__file__), 'Image.jpg')
 
 # Create your views here.
 def searchForSketch(request):
-    pass
+    return render(request, 'sketchs/search.html')
 
 def listAllSketches(request):
-    pass
+   return render(request, 'sketchs/list.html')
 
 def sketchDetail(request):
-    pass
+    return render(request, 'sketchs/detail.html')
 
 ## Todo: Update later
 def generateNewSketch(request):
