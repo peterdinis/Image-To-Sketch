@@ -3,8 +3,8 @@ Image-To-Sketch {% endblock %} {% block content %}
 <h1 class="text-center mt-10 text-4xl text-black">Login</h1>
 <form class="form" action="" method="POST">
   {% csrf_token %}
-  <div id="div_id_username" class="mb-3">
-    <label for="id_username" class="block text-gray-700 text-sm font-bold mb-2">
+  <div id="username" class="mb-3">
+    <label for="username" class="block text-gray-700 text-sm font-bold mb-2">
       Username<span class="asteriskField"></span>
     </label>
     <input
@@ -16,10 +16,10 @@ Image-To-Sketch {% endblock %} {% block content %}
       autofocus=""
       class="textinput w-full py-2 border text-gray-700 rounded-lg appearance-none bg-white border-gray-300 px-4 block leading-normal focus:outline-none"
       required=""
-      id="id_username"
+      id="username"
     />
   </div>
-  <div id="div_id_password1" class="mb-3">
+  <div id="div_id_password" class="mb-3">
     <label
       for="id_password1"
       class="block text-gray-700 text-sm font-bold mb-2"
@@ -28,11 +28,11 @@ Image-To-Sketch {% endblock %} {% block content %}
     </label>
     <input
       type="password"
-      name="password1"
+      name="password"
       autocomplete="new-password"
       class="passwordinput w-full py-2 border text-gray-700 rounded-lg appearance-none bg-white border-gray-300 px-4 block leading-normal focus:outline-none"
       required=""
-      id="id_password1"
+      id="password"
     />
   </div>
 

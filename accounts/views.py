@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 def loginPage(request):
-    page = 'login'
+    page = "loginpage"
     if request.user.is_authenticated:
         return redirect('homepage')
 
@@ -14,8 +14,12 @@ def loginPage(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
+        print("Username", username)
+        print("Password", password)
+
         try:
             user = Profile.objects.get(username=username)
+            print("User 19 line", user)
         except:
             messages.error(request, 'User does not exist')
 
