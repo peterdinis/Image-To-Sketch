@@ -11,15 +11,16 @@ def loginPage(request):
         return redirect('homepage')
 
     if request.method == 'POST':
-        email = request.POST.get('email').lower()
+        username = request.POST.get('username')
         password = request.POST.get('password')
 
         try:
-            user = Profile.objects.get(email=email)
+            user = Profile.objects.get(username=username)
         except:
             messages.error(request, 'User does not exist')
 
-        user = authenticate(request, email=email, password=password)
+        user = authenticate(request, username=username, password=password)
+        print("User", user)
 
         if user is not None:
             login(request, user)
