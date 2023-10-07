@@ -23,7 +23,7 @@ def loginPage(request):
 
         if user is not None:
             login(request, user)
-            return redirect('homepage')
+            return redirect('profilepage')
         else:
             messages.error(request, 'Username OR password does not exit')
 
@@ -35,14 +35,14 @@ def logoutUser(request):
     return redirect('homepage')
 
 def registerPage(request):
-    form = UserCreationForm()  # Use the built-in UserCreationForm
+    form = UserCreationForm()
 
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('home')
+            return redirect('loginpge')
         else:
             messages.error(request, 'An error occurred during registration')
 
