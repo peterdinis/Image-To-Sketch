@@ -48,9 +48,7 @@ INSTALLED_APPS = [
 ]
 
 INTERNAL_IPS = [
-    # ...
-    "127.0.0.1",
-    # ...
+    "127.0.0.1"
 ]
 
 
@@ -145,7 +143,8 @@ MEDIA_ROOT = BASE_DIR / 'static/images'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
 CRISPY_TEMPLATE_PACK = "tailwind"
+
+LOGIN_REDIRECT_URL = '/profile'
