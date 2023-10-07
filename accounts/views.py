@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import Profile
-from .forms import MyUserCreationForm
+from django.contrib.auth.forms import UserCreationForm 
 
 # Create your views here.
 def loginPage(request):
@@ -35,22 +35,18 @@ def logoutUser(request):
     return redirect('homepage')
 
 def registerPage(request):
-    form = MyUserCreationForm()
+    form = UserCreationForm()  # Use the built-in UserCreationForm
 
     if request.method == 'POST':
-        form = MyUserCreationForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            user.save()
+            user = form.save()
             login(request, user)
             return redirect('home')
         else:
             messages.error(request, 'An error occurred during registration')
 
     return render(request, 'accounts/register.html', {'form': form})
-
-
 def profilePage(request, pk):
     user = Profile.objects.get(id=pk)
     context = {'user': user}
