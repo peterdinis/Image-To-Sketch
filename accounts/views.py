@@ -42,7 +42,7 @@ def registerPage(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('loginpge')
+            return redirect('loginpage')
         else:
             messages.error(request, 'An error occurred during registration')
 

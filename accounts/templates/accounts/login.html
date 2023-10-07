@@ -1,12 +1,50 @@
-{% extends 'main.html' %}
-{% load tailwind_filters %}
-{% block title %} Image-To-Sketch {% endblock %}
-
-{% block content %}
+{% extends 'main.html' %} {% load tailwind_filters %} {% block title %}
+Image-To-Sketch {% endblock %} {% block content %}
 <h1 class="text-center mt-10 text-4xl text-black">Login</h1>
 <form class="form" action="" method="POST">
-  {% csrf_token %}
-  {{ form|crispy }}
-  <button class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700 rounded-xl">Login</button>
+  <input
+    type="hidden"
+    name="csrfmiddlewaretoken"
+    value="fvlyU6IkgpD96Z7UWpSTwR7GI4nU8xci7mFCDFf33gA7bVGB6S0Bhh6vR5lHNqnu"
+  />
+
+  <div id="div_id_username" class="mb-3">
+    <label for="id_username" class="block text-gray-700 text-sm font-bold mb-2">
+      Username<span class="asteriskField">*</span>
+    </label>
+    <input
+      type="text"
+      name="username"
+      maxlength="150"
+      autocapitalize="none"
+      autocomplete="username"
+      autofocus=""
+      class="textinput w-full py-2 border text-gray-700 rounded-lg appearance-none bg-white border-gray-300 px-4 block leading-normal focus:outline-none"
+      required=""
+      id="id_username"
+    />
+  </div>
+  <div id="div_id_password1" class="mb-3">
+    <label
+      for="id_password1"
+      class="block text-gray-700 text-sm font-bold mb-2"
+    >
+      Password<span class="asteriskField">*</span>
+    </label>
+    <input
+      type="password"
+      name="password1"
+      autocomplete="new-password"
+      class="passwordinput w-full py-2 border text-gray-700 rounded-lg appearance-none bg-white border-gray-300 px-4 block leading-normal focus:outline-none"
+      required=""
+      id="id_password1"
+    />
+  </div>
+
+  <button
+    class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700 rounded-xl"
+  >
+    Login
+  </button>
 </form>
 {% endblock %}
