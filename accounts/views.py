@@ -8,7 +8,7 @@ from .forms import MyUserCreationForm
 def loginPage(request):
     page = 'login'
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('homepage')
 
     if request.method == 'POST':
         email = request.POST.get('email').lower()
@@ -23,7 +23,7 @@ def loginPage(request):
 
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('homepage')
         else:
             messages.error(request, 'Username OR password does not exit')
 
@@ -32,7 +32,7 @@ def loginPage(request):
 
 def logoutUser(request):
     logout(request)
-    return redirect('home')
+    return redirect('homepage')
 
 def registerPage(request):
     form = MyUserCreationForm()
@@ -51,5 +51,7 @@ def registerPage(request):
     return render(request, 'accounts/register.html', {'form': form})
 
 
-def profilepage(request):
-    return render(request, 'accounts/profile.html')
+def profilePage(request, pk):
+    user = Profile.objects.get(id=pk)
+    context = {'user': user}
+    return render(request, 'accounts/profile.html', context)
