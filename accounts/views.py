@@ -14,17 +14,12 @@ def loginPage(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        print("Username", username)
-        print("Password", password)
-
         try:
             user = Profile.objects.get(username=username)
-            print("User 19 line", user)
         except:
             messages.error(request, 'User does not exist')
 
         user = authenticate(request, username=username, password=password)
-        print("User", user)
 
         if user is not None:
             login(request, user)
@@ -46,14 +41,11 @@ def registerPage(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            print(user)
             return redirect('loginpage')
         else:
             messages.error(request, 'An error occurred during registration')
 
     return render(request, 'accounts/register.html', {'form': form})
 
-def profilePage(request, pk):
-    user = Profile.objects.get(id=pk)
-    context = {'user': user}
-    return render(request, 'accounts/profile.html', context)
+def profilePage(request):
+    return render(request, 'accounts/profile.html')
