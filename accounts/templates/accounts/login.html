@@ -2,6 +2,7 @@
 Image-To-Sketch {% endblock %} {% block content %}
 <h1 class="text-center mt-10 text-4xl text-black">Login</h1>
 <form class="form" action="" method="POST">
+  {% csrf_token %}
   <input
     type="hidden"
     name="csrfmiddlewaretoken"
@@ -10,7 +11,7 @@ Image-To-Sketch {% endblock %} {% block content %}
 
   <div id="div_id_username" class="mb-3">
     <label for="id_username" class="block text-gray-700 text-sm font-bold mb-2">
-      Username<span class="asteriskField">*</span>
+      Username<span class="asteriskField"></span>
     </label>
     <input
       type="text"
@@ -29,7 +30,7 @@ Image-To-Sketch {% endblock %} {% block content %}
       for="id_password1"
       class="block text-gray-700 text-sm font-bold mb-2"
     >
-      Password<span class="asteriskField">*</span>
+      Password<span class="asteriskField"></span>
     </label>
     <input
       type="password"
