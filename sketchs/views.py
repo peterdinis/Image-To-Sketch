@@ -5,9 +5,6 @@ import os
 # Assuming 'Image.jpg' is in the same directory as your views.py file
 image_path = os.path.join(os.path.dirname(__file__), 'Image.jpg')
 
-# Create your views here.
-def searchForSketch(request):
-    return render(request, 'sketchs/search.html')
 
 def listAllSketches(request):
    return render(request, 'sketchs/list.html')

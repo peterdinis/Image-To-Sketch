@@ -3,7 +3,6 @@ from . import views
 
 urlpatterns = [
     path("", views.listAllSketches, name="list_sketchs"),
-    path("search/", views.searchForSketch, name="search_for_sketch"),
     path('<slug:slug>', views.sketchDetail, name="sketch_detail"),
     path("generate/", views.generateNewSketch, name="sketch_generate")
 ]
