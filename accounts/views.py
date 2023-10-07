@@ -42,12 +42,12 @@ def registerPage(request):
         if form.is_valid():
             user = form.save()
             print(user)
-            """ login(request, user) """
             return redirect('loginpage')
         else:
             messages.error(request, 'An error occurred during registration')
 
     return render(request, 'accounts/register.html', {'form': form})
+
 def profilePage(request, pk):
     user = Profile.objects.get(id=pk)
     context = {'user': user}
