@@ -4,5 +4,13 @@
 
 {% block content %}
 <h1 class="text-center mt-10 text-4xl text-black">Generate new sketch</h1>
+<form action="/sketchs/generate/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="image">
+    <input type="submit" value="Generate sketch">
+</form>
 
+{% if image %}
+    <img src="{{image}}" alt="Sketch">
+{% endif %}
 {% endblock %}

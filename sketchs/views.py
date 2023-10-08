@@ -1,40 +1,32 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+from django.core.files.storage import FileSystemStorage
 import cv2
+
 
 def listAllSketches(request):
    return render(request, 'sketchs/list.html')
 
-## Todo: Update later
-def generate_new_sketch(request):
-    """Generates a new sketch from an image.
+def generateNewSketch(request):
+    if request.method == "POST":
+        # Upload fotky
+        image = request.FILES['image']
+        fs = FileSystemStorage()
+        file_name = fs.save(image.name, image)
+        image_path = fs.url(file_name)
 
-    Args:
-        request: A Django HttpRequest object.
+        # Vytvorenie skice
+        sketch = cv2.imread(image_path)
+        gray_img = cv2.cvtColor(sketch, cv2.COLOR_BGR2GRAY)
+        invert = cv2.bitwise_not(gray_img)
+        blur = cv2.GaussianBlur(invert, (21, 21), 0)
+        inverted_blur = cv2.bitwise_not(blur)
+        sketch = cv2.divide(gray_img, inverted_blur, scale=256.0)
 
-    Returns:
-        A Django HttpResponse object.
-    """
+        # Uloženie skice
+        cv2.imwrite("sketch.png", sketch)
 
-    # Load the image.
-    image = cv2.imread('Image.jpg')
-
-    # Convert the image to grayscale.
-    gray_img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-    # Invert the image.
-    invert = cv2.bitwise_not(gray_img)
-
-    # Smooth the image with Gaussian blur.
-    blur = cv2.GaussianBlur(invert, (21, 21), 0)
-
-    # Invert the blurred image.
-    inverted_blur = cv2.bitwise_not(blur)
-
-    # Divide the original grayscale image by the inverted blurred image to create the sketch.
-    sketch = cv2.divide(gray_img, inverted_blur, scale=256.0)
-
-    # Save the sketch image.
-    cv2.imwrite("sketch.png", sketch)
-
-    # Return the HTML response.
+        # Vrátenie upravenej fotky
+        return HttpResponse(open("sketch.png", "rb").read())
+        
     return render(request, 'sketchs/generate.html')
