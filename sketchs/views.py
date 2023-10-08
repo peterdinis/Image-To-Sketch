@@ -9,9 +9,6 @@ image_path = os.path.join(os.path.dirname(__file__), 'Image.jpg')
 def listAllSketches(request):
    return render(request, 'sketchs/list.html')
 
-def sketchDetail(request):
-    return render(request, 'sketchs/detail.html')
-
 ## Todo: Update later
 def generateNewSketch(request):
     # Check if the HTTP request is a POST request
@@ -42,4 +39,4 @@ def generateNewSketch(request):
         else:
             return render(request, 'sketch_result.html', {'sketch_generated': False})
 
-    return render(request, 'generate_sketch.html')
+    return render(request, 'sketchs/generate.html')
