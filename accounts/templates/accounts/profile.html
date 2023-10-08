@@ -14,7 +14,7 @@ Image-To-Sketch {% endblock %} {% block content %}
     <ul class="space-y-2 text-sm">
       <li>
         <a
-          href="#"
+          href="/sketchs/generate"
           class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-200 focus:shadow-outline"
         >
           <span class="text-gray-600">
@@ -37,7 +37,7 @@ Image-To-Sketch {% endblock %} {% block content %}
         </a>
       </li>
       <li>
-        <a
+        <span
           href="#"
           class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline"
         >
@@ -57,8 +57,8 @@ Image-To-Sketch {% endblock %} {% block content %}
               />
             </svg>
           </span>
-          <span>Logout</span>
-        </a>
+          <span><a href="{% url 'logoutUser'%}">Logout</a></span>
+        </span>
       </li>
     </ul>
   </div>
