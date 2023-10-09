@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+
+{% block title %} Image-To-Sketch {% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-10 text-4xl text-black">Lists all sketchs</h1>
+<ul>
+    {% for sketch in sketches %}
+        <li>{{ sketch.name }}</li>
+        <img src="{{ sketch.image.url }}" alt="{{ sketch.name }}" width="200">
+    {% endfor %}
+</ul>
+{% endblock %}

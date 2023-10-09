@@ -3,9 +3,14 @@ from django.http import HttpResponse
 from django.core.files.storage import FileSystemStorage
 import cv2
 from .forms import SketchForm
+from .models import Sketch
 
-def listAllSketches(request):
-   return render(request, 'sketchs/list.html')
+def sketch_list(request):
+    sketches = Sketch.objects.all()
+    sutff_for_frontend = {
+        'sketches': sketches
+    }
+    return render(request, 'sketchs/lists.html', sutff_for_frontend)
 
 def generateNewSketch(request):
     if request.method == "POST":
