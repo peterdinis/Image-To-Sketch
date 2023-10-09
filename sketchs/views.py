@@ -12,6 +12,15 @@ def sketch_list(request):
     }
     return render(request, 'sketchs/lists.html', sutff_for_frontend)
 
+def sketch_search(request):
+    query = request.GET.get('q', '')
+    sketches = Sketch.objects.filter(name__icontains=query)
+    stuff_for_frontend = {
+        'sketches': sketches,
+        'query': query
+    }
+    return render(request, 'sketchs/search.html', stuff_for_frontend)
+
 def generateNewSketch(request):
     if request.method == "POST":
         form = SketchForm(request.POST, request.FILES)

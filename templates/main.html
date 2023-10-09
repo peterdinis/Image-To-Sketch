@@ -11,7 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
-    <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
+    <script
+      defer
+      src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"
+    ></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -19,7 +22,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    
+
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
@@ -42,6 +45,16 @@
           </svg>
         </button>
       </div>
+      <a
+        class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold rounded-xl transition duration-200"
+        href="/sketchs/list"
+        >All Sketchs</a
+      >
+      <a
+        class="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
+        href="/sketchs/search"
+        >Search for sketch</a
+      >
       <a
         class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold rounded-xl transition duration-200"
         href="/accounts/login"
@@ -82,6 +95,8 @@
             </svg>
           </button>
         </div>
+        <a class="mt-6 font-bold text-xl" href="/sketchs/list">List all sketchs</a>
+        <a class="mt-6 font-bold text-xl" href="/sketchs/search">Search for sketch</a>
         <div class="mt-auto">
           <div class="pt-6">
             <a
