@@ -55,6 +55,13 @@
         href="/sketchs/search"
         >Search for sketch</a
       >
+      {% if user.is_authenticated %}
+        <a
+          class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold rounded-xl transition duration-200"
+          href="/sketchs/generate"
+          >Generate sketch</a
+        >
+      {% endif %}
       <a
         class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold rounded-xl transition duration-200"
         href="/accounts/login"
@@ -97,6 +104,9 @@
         </div>
         <a class="mt-6 font-bold text-xl" href="/sketchs/list">List all sketchs</a>
         <a class="mt-6 font-bold text-xl" href="/sketchs/search">Search for sketch</a>
+        {% if user.is_authenticated %}
+          <a class="mt-6 font-bold text-xl" href="/sketchs/generate">Generate sketch</a>
+        {% endif %}
         <div class="mt-auto">
           <div class="pt-6">
             <a
