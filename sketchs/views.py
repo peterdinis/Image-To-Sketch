@@ -16,3 +16,7 @@ def sketch_search(request):
         'query': query
     }
     return render(request, 'sketchs/search.html', stuff_for_frontend)
+
+
+def generate_sketch(request):
+    return render(request, 'sketchs/generate.html')
