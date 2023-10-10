@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import Sketch
 import cv2
+import os
+from django.conf import settings
 
 def sketch_list(request):
     sketches = Sketch.objects.all()
@@ -20,41 +22,36 @@ def sketch_search(request):
 
 
 def generate_sketch(request):
-    # Read the original image
-    image1 = cv2.imread('image.jpg')
-    
-    # Display the original image
-    window_name = 'Actual image'
-    cv2.imshow(window_name, image1)
+    if request.method == 'POST':
+        uploaded_image = request.FILES['image']
+        if uploaded_image.name.endswith(('.jpg', '.jpeg', '.png', '.gif')):
+            # Save the uploaded image
+            media_root = settings.MEDIA_ROOT
+            image_path = os.path.join(media_root, 'uploaded_image.jpg')
+            with open(image_path, 'wb') as f:
+                for chunk in uploaded_image.chunks():
+                    f.write(chunk)
 
-    # Convert the image to grayscale
-    grey_img = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)
-    
-    # Invert the grayscale image
-    invert = cv2.bitwise_not(grey_img)
-    
-    # Apply Gaussian blur to the inverted image
-    blur = cv2.GaussianBlur(invert, (21, 21), 0)
-    
-    # Invert the blurred image
-    invertedblur = cv2.bitwise_not(blur)
-    
-    # Create the sketch by dividing the grayscale image by the inverted blurred image
-    sketch = cv2.divide(grey_img, invertedblur, scale=256.0)
-    
-    # Save the sketch as "sketch.jpeg"
-    cv2.imwrite("sketch.jpeg", sketch)
-    
-    # Read the saved sketch image
-    image = cv2.imread("sketch.jpeg")
-    
-    # Display the sketch image
-    window_name = 'Sketch image'
-    cv2.imshow(window_name, image)
-    
-    # Wait for a key press and then close the OpenCV windows
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-    
-    # Render the Django template
+            # Process the uploaded image
+            image1 = cv2.imread(image_path)
+            if image1 is not None:
+                grey_img = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)
+                invert = cv2.bitwise_not(grey_img)
+                blur = cv2.GaussianBlur(invert, (21, 21), 0)
+                invertedblur = cv2.bitwise_not(blur)
+                sketch = cv2.divide(grey_img, invertedblur, scale=256.0)
+
+                # Save the generated sketch image
+                sketch_path = os.path.join(media_root, 'sketch.jpeg')
+                cv2.imwrite(sketch_path, sketch)
+
+                return render(request, 'sketchs/generate.html', {'sketch_path': 'media/sketch.jpeg'})
+            else:
+                # Handle the case where image loading failed
+                return render(request, 'sketchs/error.html')
+
+        else:
+            # Handle invalid file type
+            return render(request, 'sketchs/error.html')
+
     return render(request, 'sketchs/generate.html')
