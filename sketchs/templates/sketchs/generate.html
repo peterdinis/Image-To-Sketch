@@ -7,7 +7,13 @@ Image-To-Sketch {% endblock %} {% block content %}
   action="{% url 'generate_sketch' %}"
 >
   {% csrf_token %}
-  <input type="file" name="image" />
-  <input type="submit" value="Upload" />
+  <div class="mt-10 flex flex-row items-center">
+    <input
+      class="block text-sm text-slate-500 mr-4 py-2 px-4 rounded-md border-0 text-sm font-semibold bg-pink-50 text-pink-700 hover:bg-pink-100 cursor-pointer"
+      type="file"
+      name="image"
+    />
+    <input type="submit" value="Upload" />
+  </div>
 </form>
 {% endblock %}
