@@ -3,11 +3,21 @@ from .models import Sketch
 import cv2
 import os
 from django.conf import settings
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def sketch_list(request):
     sketches = Sketch.objects.all()
+    page_num = request.GET.get('page', 1)
+    paginator = Paginator(sketches, 10)
+    try:
+        page_obj = paginator.page(page_num)
+    except PageNotAnInteger:
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        page_obj = paginator.page(paginator.num_pages)
     sutff_for_frontend = {
-        'sketches': sketches
+        'sketches': sketches,
+        "page_obj": page_obj
     }
     return render(request, 'sketchs/lists.html', sutff_for_frontend)
 
