@@ -37,8 +37,10 @@ def sketch_search(request):
 
 def generate_sketch(request):
     if request.method == 'POST':
-        uploaded_image = request.FILES['image']
-        if uploaded_image.name.endswith(('.jpg', '.jpeg', '.png', '.gif')):
+        uploaded_image = request.FILES.get('image')
+        name = request.POST.get('name')
+
+        if uploaded_image and uploaded_image.name.endswith(('.jpg', '.jpeg', '.png', '.gif')):
             # Save the uploaded image
             media_root = settings.MEDIA_ROOT
             image_path = os.path.join(media_root, 'uploaded_image.jpg')
@@ -59,13 +61,15 @@ def generate_sketch(request):
                 sketch_path = os.path.join(media_root, 'sketch.jpeg')
                 cv2.imwrite(sketch_path, sketch)
 
+                # Create a Sketch object and save it to the database
+                sketch_obj = Sketch(name=name, image=sketch_path)
+                sketch_obj.save()
+
                 return render(request, 'sketchs/generate.html', {'sketch_path': 'media/sketch.jpeg'})
             else:
-                # Handle the case where image loading failed
-                return render(request, 'sketchs/error.html')
+                print("Error: Image processing failed")
 
         else:
-            # Handle invalid file type
-            return render(request, 'sketchs/error.html')
+            print("Error: Invalid file type")
 
     return render(request, 'sketchs/generate.html')

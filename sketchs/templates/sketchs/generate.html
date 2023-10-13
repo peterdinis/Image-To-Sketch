@@ -1,5 +1,9 @@
-{% extends 'main.html' %} {% load tailwind_filters %} {% block title %}
-Image-To-Sketch {% endblock %} {% block content %}
+{% extends 'main.html' %}
+{% load tailwind_filters %}
+{% block title %}
+Image-To-Sketch
+{% endblock %}
+{% block content %}
 <h1 class="text-center mt-10 text-4xl text-black">Generate sketch</h1>
 <form
   method="post"
@@ -12,6 +16,12 @@ Image-To-Sketch {% endblock %} {% block content %}
       class="block text-sm text-slate-500 mr-4 py-2 px-4 rounded-md border-0 text-sm font-semibold bg-pink-50 text-pink-700 hover:bg-pink-100 cursor-pointer"
       type="file"
       name="image"
+    />
+    <input
+      class="block text-sm text-slate-500 mr-4 py-2 px-4 rounded-md border-0 text-sm font-semibold bg-pink-50 text-pink-700 hover-bg-pink-100 cursor-pointer"
+      type="text"
+      name="name"
+      placeholder="Enter a name"
     />
     <input type="submit" value="Upload" />
   </div>
