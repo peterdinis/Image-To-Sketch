@@ -25,9 +25,13 @@ def sketch_search(request):
     query = request.GET.get('q', '')
     sketches = Sketch.objects.filter(name__icontains=query)
     stuff_for_frontend = {
-        'sketches': sketches,
         'query': query
     }
+
+    # Check if there are search results to display
+    if query and sketches:
+        stuff_for_frontend['sketches'] = sketches
+
     return render(request, 'sketchs/search.html', stuff_for_frontend)
 
 

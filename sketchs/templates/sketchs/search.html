@@ -1,5 +1,11 @@
-{% extends 'main.html' %} {% load tailwind_filters %} {% block title %}
-Image-To-Sketch {% endblock %} {% block content %}
+{% extends 'main.html' %}
+{% load tailwind_filters %}
+
+{% block title %}
+Image-To-Sketch
+{% endblock %}
+
+{% block content %}
 <h1 class="text-center mt-10 text-4xl text-black">Search</h1>
 <form method="GET" action="{% url 'sketch_search' %}">
   <div class="max-w-md mx-auto">
@@ -33,10 +39,14 @@ Image-To-Sketch {% endblock %} {% block content %}
     </div>
   </div>
 </form>
-<ul>
-  {% for sketch in sketches %}
-  <li>{{ sketch.name }}</li>
-  <img src="{{ sketch.image.url }}" alt="{{ sketch.name }}" width="200" />
-  {% endfor %}
-</ul>
+{% if sketches %}
+  <ul>
+    {% for sketch in sketches %}
+      <li>{{ sketch.name }}</li>
+      <img src="{{ sketch.image.url }}" alt="{{ sketch.name }}" width="200" />
+    {% endfor %}
+  </ul>
+{% else %}
+  <p class="text-center mt-6 font-bold text-red-700">Sketch with this name does not exists.</p>
+{% endif %}
 {% endblock %}
