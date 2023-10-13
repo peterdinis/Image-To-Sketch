@@ -1,37 +1,51 @@
-{% extends 'main.html' %} {% load tailwind_filters %} {% block title %}
-Image-To-Sketch {% endblock %} {% block content %}
-<h1 class="text-center mt-10 text-4xl text-black">List all sketchs</h1>
+{% extends 'main.html' %}
+{% load tailwind_filters %}
+
+{% block title %}
+Image-To-Sketch
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-10 text-4xl text-black">List all sketches</h1>
 <div class="text-center mt-5">
-  <a href="/sketchs/search">Search for sketch</a>
+  <a href="/sketchs/search">Search for sketches</a>
 </div>
 <div class="flex flex-wrap justify-center mt-10">
-  <!-- card 1 -->
-  {%for sketch in sketches %}
+  {% for sketch in page_obj %} 
   <div class="p-4 max-w-sm">
-    <div class="flex rounded-lg  p-8 flex-col">
+    <div class="flex rounded-lg p-8 flex-col">
       <div class="flex items-center mb-3">
-        <div
-          class="w-full mr-3 inline-flex items-center justify-center rounded-full text-white flex-shrink-0"
-        >
-          <img
-            src="{{ sketch.image.url }}"
-            alt="{{ sketch.name }}"
-            class="block h-auto w-full"
-          />
+        <div class="w-full mr-3 inline-flex items-center justify-center rounded-full text-white flex-shrink-0">
+          <img src="{{ sketch.image.url }}" alt="{{ sketch.name }}" class="block h-auto w-full" />
         </div>
       </div>
       <div class="flex flex-col justify-between flex-grow">
         <h1 class="text-lg">
-          <span
-            class="font-bold no-underline hover:underline text-black"
-            href="#"
-          >
+          <span class="font-bold no-underline hover:underline text-black" href="#">
             {{ sketch.name }}
           </span>
         </h1>
       </div>
     </div>
   </div>
-  {%endfor%}
+  {% endfor %}
+</div>
+
+<div class="mt-5 flex justify-center">
+  <div class="pagination">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+      {% endif %}
+
+      <span class="current-page">{{ page_obj.number }}</span>
+
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
 </div>
 {% endblock %}
