@@ -4,7 +4,6 @@ from django.contrib.auth import authenticate, login, logout
 from .models import Profile
 from django.contrib.auth.forms import UserCreationForm 
 
-# Create your views here.
 def loginPage(request):
     page = "loginpage"
     if request.user.is_authenticated:
@@ -25,7 +24,7 @@ def loginPage(request):
             login(request, user)
             return redirect('profilepage')
         else:
-            messages.error(request, 'Username OR password does not exit')
+            messages.error(request, 'Username OR password does not exists')
 
     context = {'page': page}
     return render(request, 'accounts/login.html', context)

@@ -5,6 +5,7 @@ import os
 from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import uuid
+from django.contrib import messages
 
 def sketch_list(request):
     sketches = Sketch.objects.all()
@@ -65,9 +66,9 @@ def generate_sketch(request):
 
                 return render(request, 'sketchs/generate.html', {'sketch_path': 'media/sketch.jpeg'})
             else:
-                print("Error: Image processing failed")
+                messages.error(request, 'Something went wrong doing processing image')
 
         else:
-            print("Error: Invalid file type")
+            messages.error(request, 'Imge was not converted as a sketch')
 
     return render(request, 'sketchs/generate.html')
