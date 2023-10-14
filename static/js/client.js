@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Open
+
     const burger = document.querySelectorAll('.navbar-burger');
     const menu = document.querySelectorAll('.navbar-menu');
 
@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Close
     const close = document.querySelectorAll('.navbar-close');
     const backdrop = document.querySelectorAll('.navbar-backdrop');
 
