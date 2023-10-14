@@ -39,10 +39,9 @@ Image-To-Sketch
         <a href="?page={{ page_obj.previous_page_number }}">previous</a>
       {% endif %}
 
-      <span class="current-page">{{ page_obj.number }}</span>
-
       {% if page_obj.has_next %}
         <a href="?page={{ page_obj.next_page_number }}">next</a>
+        <span class="current-page">{{ page_obj.number }}</span>
         <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
       {% endif %}
     </span>

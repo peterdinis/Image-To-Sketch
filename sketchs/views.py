@@ -9,7 +9,7 @@ import uuid
 def sketch_list(request):
     sketches = Sketch.objects.all()
     page_num = request.GET.get('page', 1)
-    paginator = Paginator(sketches, 10)
+    paginator = Paginator(sketches, 6)
     try:
         page_obj = paginator.page(page_num)
     except PageNotAnInteger:
@@ -29,7 +29,6 @@ def sketch_search(request):
         'query': query
     }
 
-    # Check if there are search results to display
     if query and sketches:
         stuff_for_frontend['sketches'] = sketches
 
@@ -42,14 +41,12 @@ def generate_sketch(request):
         name = request.POST.get('name')
 
         if uploaded_image and uploaded_image.name.endswith(('.jpg', '.jpeg', '.png', '.gif')):
-            # Save the uploaded image
             media_root = settings.MEDIA_ROOT
             image_path = os.path.join(media_root, 'uploaded_image.jpg')
             with open(image_path, 'wb') as f:
                 for chunk in uploaded_image.chunks():
                     f.write(chunk)
 
-            # Process the uploaded image
             image1 = cv2.imread(image_path)
             if image1 is not None:
                 grey_img = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)
@@ -60,12 +57,9 @@ def generate_sketch(request):
                 
                 custom_file_name = uuid.uuid4().hex.upper()[0:6]
                 final_file_name = custom_file_name + '.jpeg'
-                # Save the generated sketch image
-                #sketch_path = os.path.join(media_root, 'sketch.jpeg')
                 sketch_path = os.path.join(media_root, final_file_name)
                 cv2.imwrite(sketch_path, sketch)
-
-                # Create a Sketch object and save it to the database
+                
                 sketch_obj = Sketch(name=name, image=sketch_path)
                 sketch_obj.save()
 
