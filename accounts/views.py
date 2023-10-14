@@ -45,6 +45,3 @@ def registerPage(request):
             messages.error(request, 'An error occurred during registration')
 
     return render(request, 'accounts/register.html', {'form': form})
-
-def profilePage(request):
-    return render(request, 'accounts/profile.html')
